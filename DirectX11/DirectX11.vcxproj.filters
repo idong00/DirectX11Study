@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
@@ -18,6 +14,16 @@
     </Filter>
     <Filter Include="Source\Keyboard">
       <UniqueIdentifier>{ffab09cc-832a-4746-9c0c-8aacc14550a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header\Mouse">
+      <UniqueIdentifier>{b6a2be5d-b867-4b85-8c1b-4e20628dc135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Mouse">
+      <UniqueIdentifier>{c2cf2b9d-dd3c-4614-9c2c-6b09c1823fa7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +51,12 @@
     <ClCompile Include="Keyboard\KeyboardEvent.cpp">
       <Filter>Source\Keyboard</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse\MouseClass.cpp">
+      <Filter>Source\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse\MouseEvent.cpp">
+      <Filter>Source\Mouse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StringConverter.h">
@@ -67,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="Keyboard\KeyboardEvent.h">
       <Filter>Header\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\MouseClass.h">
+      <Filter>Header\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse\MouseEvent.h">
+      <Filter>Header\Mouse</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
