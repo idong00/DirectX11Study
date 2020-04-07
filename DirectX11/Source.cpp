@@ -8,9 +8,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Engine engine;
 	engine.Initialize(hInstance, "KDH", "MyWindowClass", 800, 600);
 
-	while (engine.ProcessMessages()) {
-		
+	while (engine.ProcessMessages())
+	{
 		engine.Update();
+		engine.RenderFrame();
 	}
 	return 0;
 }
