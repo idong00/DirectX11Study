@@ -4,6 +4,10 @@ bool Graphics::Initialize(HWND hWnd, int width, int height)
 {
 	if (!InitializeDirectX(hWnd, width, height))
 		return false;
+
+	if (!InitializeShaders())
+		return false;
+
 	return true;
 }
 
@@ -80,4 +84,22 @@ bool Graphics::InitializeDirectX(HWND hWnd, int width, int height)
 	this->deviceContext->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), NULL);
 
 	return true;  // 세팅된 어댑터 알 수 있음
+}
+
+bool Graphics::InitializeShaders()
+{
+	D3D11_INPUT_ELEMENT_DESC layout[] =
+	{
+		{ "POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	};
+
+	UINT numElements = ARRAYSIZE(layout);
+
+	HRESULT hr = this->device->CreateInputLayout(layout, numElements, vertex_shader_buffer->GetBufferPointer(), vertex_shader_buffer->GetBufferSize(), this->inputLayout.GetAddressOf());
+	if (FAILED(hr)) { // 에러 발생
+		ErrorLogger::Log(hr, "Failed to create input layout");
+		return false;
+	}
+
+	return true;
 }

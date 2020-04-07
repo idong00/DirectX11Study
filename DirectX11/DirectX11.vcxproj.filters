@@ -104,5 +104,8 @@
     <ClInclude Include="Graphics\AdapterReader.h">
       <Filter>Header\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Vertex.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
