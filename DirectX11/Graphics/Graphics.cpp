@@ -83,6 +83,18 @@ bool Graphics::InitializeDirectX(HWND hWnd, int width, int height)
 
 	this->deviceContext->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), NULL);
 
+	// create the Viewport
+	D3D11_VIEWPORT viewport;
+	ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
+
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.Width = width;
+	viewport.Height = height;
+
+	// set the Viewport
+	this->deviceContext->RSSetViewports(1, &viewport);
+
 	return true;  // 세팅된 어댑터 알 수 있음
 }
 
@@ -117,6 +129,9 @@ bool Graphics::InitializeShaders()
 	UINT numElements = ARRAYSIZE(layout);
 
 	if (!vertexshader.Initialize(this->device, shaderfolder+ L"vertexshader.cso", layout, numElements))
+		return false;
+
+	if (!pixelshader.Initialize(this->device, shaderfolder + L"pixelshader.cso"))
 		return false;
 
 	return true;

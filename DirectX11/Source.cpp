@@ -19,6 +19,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 // input assembler ok
 // vertex shader ok
-// rasterizer
-// pixel shader
-// output merger
+// rasterizer ok
+// pixel shader ok
+// output merger ok

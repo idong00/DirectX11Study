@@ -118,5 +118,8 @@
     <FxCompile Include="vertexshader.hlsl">
       <Filter>Resource</Filter>
     </FxCompile>
+    <FxCompile Include="pixelshader.hlsl">
+      <Filter>Resource</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
