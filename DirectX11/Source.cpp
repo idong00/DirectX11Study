@@ -22,3 +22,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 // rasterizer ok
 // pixel shader ok
 // output merger ok
+
+// create our vertex buffer
+// draw

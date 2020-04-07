@@ -1,11 +1,5 @@
-﻿  Engine.cpp
-  Graphics.cpp
-c:\directx11study\directx11\graphics\graphics.cpp(33): warning C4552: '-': 식의 결과가 사용되지 않습니다.
-c:\directx11study\directx11\graphics\graphics.cpp(92): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\directx11study\directx11\graphics\graphics.cpp(93): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Shaders.cpp
-  RenderWindow.cpp
-  Source.cpp
-  WindowContainer.cpp
-  코드를 생성하고 있습니다...
+﻿  Graphics.cpp
+c:\directx11study\directx11\graphics\graphics.cpp(49): warning C4552: '-': 식의 결과가 사용되지 않습니다.
+c:\directx11study\directx11\graphics\graphics.cpp(108): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\graphics.cpp(109): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   DirectX11.vcxproj -> C:\DirectX11Study\x64\Debug\DirectX11.exe

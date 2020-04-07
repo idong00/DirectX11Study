@@ -2,6 +2,7 @@
 
 #include "AdapterReader.h"
 #include "Shaders.h"
+#include "Vertex.h"
 
 class Graphics {
 public:
@@ -11,6 +12,7 @@ public:
 private:
 	bool InitializeDirectX(HWND hWnd, int width, int height);
 	bool InitializeShaders();
+	bool InitializeScene();
 
 private:
 	// 스마트 포인터( ref 카운터 )
@@ -21,4 +23,6 @@ private:
 
 	VertexShader vertexshader;
 	PixelShader pixelshader;
+
+	Microsoft::WRL::ComPtr<ID3D11Buffer> vertexBuffer;
 };
