@@ -19,7 +19,5 @@ private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain;  // 더블버퍼링 위해 필요
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
-
 	VertexShader vertexshader;
 };
