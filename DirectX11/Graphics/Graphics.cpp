@@ -21,6 +21,7 @@ void Graphics::RenderFrame()
 	
 	this->deviceContext->IASetInputLayout(this->vertexshader.GetInputLayout());
 	this->deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	this->deviceContext->RSSetState(this->rasterizerState.Get());
 
 	this->deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
 	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
@@ -110,6 +111,21 @@ bool Graphics::InitializeDirectX(HWND hWnd, int width, int height)
 
 	// set the Viewport
 	this->deviceContext->RSSetViewports(1, &viewport);
+
+	// create rasterizer state
+	D3D11_RASTERIZER_DESC rasterizerDesc;
+	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));
+
+	rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;// 채우기
+	rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;  // 어느방향이든 그림
+	//rasterizerDesc.FrontCounterClockwise = TRUE; // TRUE : CCW, FALSE : CW
+
+	hr = this->device->CreateRasterizerState(&rasterizerDesc, this->rasterizerState.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create rasterizer state");
+		return false;
+	}
 
 	return true;  // 세팅된 어댑터 알 수 있음
 }
