@@ -5,12 +5,12 @@
 struct Vertex
 {
 	DirectX::XMFLOAT3 pos;
-	DirectX::XMFLOAT3 color;
+	DirectX::XMFLOAT2 texCoord;
 
 	Vertex() {}
-	Vertex(float x, float y, float z, float r, float g, float b) :
+	Vertex(float x, float y, float z, float u, float v) :
 		pos(x, y, z),
-		color(r, g, b)
+		texCoord(u, v)
 	{
 	}
 };
