@@ -38,6 +38,11 @@ void Graphics::RenderFrame()
 	this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer2.GetAddressOf(), &stride, &offset);
 	this->deviceContext->Draw(3, 0);
 
+	// draw text
+	spriteBatch->Begin();
+	spriteFont->DrawString(spriteBatch.get(), L"Hello World", DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
+	spriteBatch->End();
+
 	this->swapChain->Present(1, NULL);// first param ??
 }
 
@@ -177,6 +182,9 @@ bool Graphics::InitializeDirectX(HWND hWnd, int width, int height)
 		ErrorLogger::Log(hr, "Failed to create rasterizer state");
 		return false;
 	}
+
+	spriteBatch = std::make_unique<DirectX::SpriteBatch>(this->deviceContext.Get());
+	spriteFont = std::make_unique<DirectX::SpriteFont>(this->device.Get(), L"Data/Fonts/comic_sans_ms_16.spritefont");
 
 	return true;  // 세팅된 어댑터 알 수 있음
 }
