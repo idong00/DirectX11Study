@@ -134,7 +134,4 @@
       <Filter>Resource</Filter>
     </FxCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\Fonts\comic_sans_ms_16.spritefont" />
-  </ItemGroup>
 </Project>
