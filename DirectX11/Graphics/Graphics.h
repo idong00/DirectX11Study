@@ -9,7 +9,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
-
+#include "Camera.h"
 
 class Graphics {
 public:
@@ -50,4 +50,6 @@ private:
 
 	int windowWidth = 0;
 	int windowHeight = 0;
+
+	Camera camera;
 };
