@@ -18,58 +18,57 @@ bool Engine::ProcessMessages()
 
 void Engine::Update()
 {
-	while (!keyboard.CharBufferIsEmpty()) {
-
+	while (!keyboard.CharBufferIsEmpty())
+	{
 		unsigned char ch = keyboard.ReadChar();
-		/*std::string outmsg = "Char : ";
-		outmsg += ch;
-		outmsg += "\n";
-		OutputDebugStringA(outmsg.c_str());*/
 	}
 
-	while (!keyboard.KeyBufferIsEmpty()) {
-
+	while (!keyboard.KeyBufferIsEmpty())
+	{
 		KeyboardEvent kbe = keyboard.ReadKey();
-
 		unsigned char keycode = kbe.GetKeyCode();
-		/*std::string outmsg = "";
-		if (kbe.IsPress()) {
-			outmsg += "Key press : ";
-		}
-		if (kbe.IsRelease()) {
-			outmsg += "Key release : ";
-
-		}
-		outmsg += keycode;
-		outmsg += "\n";
-		OutputDebugStringA(outmsg.c_str());*/
 	}
 
-	while (!mouse.EventBufferIsEmpty()) {
-
+	while (!mouse.EventBufferIsEmpty())
+	{
 		MouseEvent me = mouse.ReadEvent();
-
-		/*if (me.GetType() == MouseEvent::EventType::RAW_MOVE) {
-			std::string outmsg = "X : ";
-			outmsg += std::to_string(me.GetPosX());
-			outmsg += ", Y : ";
-			outmsg += std::to_string(me.GetPosY());
-			outmsg += "\n";
-			OutputDebugStringA(outmsg.c_str());
-		}*/
-
-		/*if (me.GetType() == MouseEvent::EventType::WHEELUP) {
-			OutputDebugStringA("MouseWheelUp\n");
+		if (mouse.IsRightDown())
+		{
+			if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
+			{
+				// y move : pitch rotation 
+				// x move : yaw rotation
+				this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
+			}
 		}
-		if (me.GetType() == MouseEvent::EventType::WHEELDOWN) {
-			OutputDebugStringA("MouseWheelDown\n");
-		}*/
-		/*std::string outmsg = "X : ";
-		outmsg += std::to_string(me.GetPosX());
-		outmsg += ", Y : ";
-		outmsg += std::to_string(me.GetPosY());
-		outmsg += "\n";
-		OutputDebugStringA(outmsg.c_str());*/
+	}
+
+	// move
+	const float cameraSpeed = 0.02f;
+
+	if (keyboard.KeyIsPressed('W'))
+	{
+		this->gfx.camera.AdjustPosition(this->gfx.camera.GetForwardVector() * cameraSpeed);
+	}
+	if (keyboard.KeyIsPressed('S'))
+	{
+		this->gfx.camera.AdjustPosition(this->gfx.camera.GetBackwardVector() * cameraSpeed);
+	}
+	if (keyboard.KeyIsPressed('A'))
+	{
+		this->gfx.camera.AdjustPosition(this->gfx.camera.GetLeftVector() * cameraSpeed);
+	}
+	if (keyboard.KeyIsPressed('D'))
+	{
+		this->gfx.camera.AdjustPosition(this->gfx.camera.GetRightVector() * cameraSpeed);
+	}
+	if (keyboard.KeyIsPressed(VK_SPACE))
+	{
+		this->gfx.camera.AdjustPosition(0.0f, cameraSpeed, 0.0f);
+	}
+	if (keyboard.KeyIsPressed('Z'))
+	{
+		this->gfx.camera.AdjustPosition(0.0f, -cameraSpeed, 0.0f);
 	}
 }
 
