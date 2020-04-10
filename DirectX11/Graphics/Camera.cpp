@@ -105,6 +105,40 @@ void Camera::AdjustRotation(float x, float y, float z)
 	this->UpdateViewMatrix();
 }
 
+void Camera::SetLookAtPos(XMFLOAT3 lookAtPos)
+{
+	// Verify that look at pos is not the same as cam pos. They cannot be the same as that wouldn't make sense and would result in undefined behavior.
+	if (lookAtPos.x == this->pos.x && lookAtPos.y == this->pos.y && lookAtPos.z == this->pos.z)
+		return;
+
+	lookAtPos.x = this->pos.x - lookAtPos.x;
+	lookAtPos.y = this->pos.y - lookAtPos.y;
+	lookAtPos.z = this->pos.z - lookAtPos.z;
+	
+	// 월드로 생각
+	//
+	// pitch
+	float pitch = 0.0f;
+	if (lookAtPos.y != 0.0f)  // 0이면 각이 안나옴
+	{
+		// x, z 거리계산
+		const float distance = sqrt(lookAtPos.x * lookAtPos.x + lookAtPos.z * lookAtPos.z);
+		pitch = atan(lookAtPos.y / distance); // 각 계산
+	}
+
+	//
+	// yaw
+	float yaw = 0.0f;
+	if (lookAtPos.x != 0.0f)
+	{
+		yaw = atan(lookAtPos.x / lookAtPos.z);
+	}
+	if (lookAtPos.z > 0)  // 반대방향을 보고 있음
+		yaw += XM_PI;
+
+	this->SetRotation(pitch, yaw, 0.0f);
+}
+
 void Camera::UpdateViewMatrix() // Updates view matrix and also updates the movement vectors
 {
 	// Calculate camera rotation matrix

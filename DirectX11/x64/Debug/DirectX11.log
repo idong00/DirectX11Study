@@ -1,7 +1,12 @@
-﻿  Graphics.cpp
-c:\directx11study\directx11\graphics\graphics.cpp(73): warning C4552: '-': 식의 결과가 사용되지 않습니다.
-c:\directx11study\directx11\graphics\graphics.cpp(175): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  Camera.cpp
+c:\directx11study\directx11\graphics\camera.cpp(124): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\camera.cpp(124): warning C4244: '초기화 중': 'double'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\camera.cpp(125): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\camera.cpp(133): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Graphics.cpp
+c:\directx11study\directx11\graphics\graphics.cpp(74): warning C4552: '-': 식의 결과가 사용되지 않습니다.
 c:\directx11study\directx11\graphics\graphics.cpp(176): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\graphics.cpp(177): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(2538): warning C4267: '초기화 중': 'size_t'에서 '_Ty'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
@@ -17,10 +22,11 @@ c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.1
           [
               T=Vertex
           ]
-  c:\directx11study\directx11\graphics\graphics.cpp(276): note: 컴파일 중인 함수 템플릿 인스턴스화 'HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)'에 대한 참조를 확인하십시오.
+  c:\directx11study\directx11\graphics\graphics.cpp(277): note: 컴파일 중인 함수 템플릿 인스턴스화 'HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)'에 대한 참조를 확인하십시오.
           with
           [
               T=Vertex
           ]
   c:\directx11study\directx11\graphics\graphics.h(36): note: 컴파일 중인 클래스 템플릿 인스턴스화 'VertexBuffer<Vertex>'에 대한 참조를 확인하세요.
+  코드를 생성하고 있습니다...
   DirectX11.vcxproj -> C:\DirectX11Study\x64\Debug\DirectX11.exe
