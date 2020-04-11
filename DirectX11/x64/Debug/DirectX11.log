@@ -7,7 +7,7 @@ c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.1
           [
               _Ty=UINT
           ]
-  c:\directx11study\directx11\graphics\vertexbuffer.h(47): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::unique_ptr<UINT,std::default_delete<_Ty>> std::make_unique<UINT,size_t,0>(size_t &&)'에 대한 참조를 확인하십시오.
+  c:\directx11study\directx11\graphics\vertexbuffer.h(54): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::unique_ptr<UINT,std::default_delete<_Ty>> std::make_unique<UINT,size_t,0>(size_t &&)'에 대한 참조를 확인하십시오.
           with
           [
               _Ty=UINT
