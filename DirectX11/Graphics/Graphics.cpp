@@ -4,6 +4,7 @@ bool Graphics::Initialize(HWND hWnd, int width, int height)
 {
 	this->windowWidth = width;
 	this->windowHeight = height;
+	this->fpsTimer.Start();
 
 	if (!InitializeDirectX(hWnd))
 		return false;
@@ -50,8 +51,17 @@ void Graphics::RenderFrame()
 	this->deviceContext->DrawIndexed(indicesBuffer.BufferSize(), 0, 0);
 
 	// draw text
+	static int fpsCounter = 0;
+	static std::string fpsString = "FPS : 0";
+	fpsCounter += 1;
+	if (fpsTimer.GetMilisecondsElapsed() > 1000.0) // 1ÃÊ
+	{
+		fpsString = "FPS : " + std::to_string(fpsCounter);
+		fpsCounter = 0;
+		fpsTimer.Restart();
+	}
 	spriteBatch->Begin();
-	spriteFont->DrawString(spriteBatch.get(), L"Hello World", DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
+	spriteFont->DrawString(spriteBatch.get(), StringConvverter::StringToWide(fpsString).c_str(), DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
 	spriteBatch->End();
 
 	this->swapChain->Present(0, NULL);// first param ??
