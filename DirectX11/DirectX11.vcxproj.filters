@@ -182,6 +182,9 @@
     <ClInclude Include="Graphics\ImGui\imstb_truetype.h">
       <Filter>Header\Graphics\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="COMException.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexshader.hlsl">
