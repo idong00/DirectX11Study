@@ -17,10 +17,10 @@ c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.1
           [
               T=Vertex
           ]
-  c:\directx11study\directx11\graphics\graphics.cpp(314): note: 컴파일 중인 함수 템플릿 인스턴스화 'HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)'에 대한 참조를 확인하십시오.
+  c:\directx11study\directx11\graphics\graphics.cpp(339): note: 컴파일 중인 함수 템플릿 인스턴스화 'HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)'에 대한 참조를 확인하십시오.
           with
           [
               T=Vertex
           ]
-  c:\directx11study\directx11\graphics\graphics.h(42): note: 컴파일 중인 클래스 템플릿 인스턴스화 'VertexBuffer<Vertex>'에 대한 참조를 확인하세요.
+  c:\directx11study\directx11\graphics\graphics.h(43): note: 컴파일 중인 클래스 템플릿 인스턴스화 'VertexBuffer<Vertex>'에 대한 참조를 확인하세요.
   DirectX11.vcxproj -> C:\DirectX11Study\x64\Debug\DirectX11.exe
