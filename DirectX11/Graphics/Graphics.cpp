@@ -43,53 +43,9 @@ void Graphics::RenderFrame()
 	
 	UINT offset = 0;
 
-	{ // pavement texture
-		//Update Constant Buffer
-		static float translationOffset[3] = { 0, 0, 4.0f };
-		XMMATRIX world = XMMatrixScaling(5.0f, 5.0f, 5.0f) * XMMatrixTranslation(translationOffset[0], translationOffset[1], translationOffset[2]);
-		cb_vs_vertexshader.data.mat = world * camera.GetViewMatrix() * camera.GetProjectionMatrix();
-		cb_vs_vertexshader.data.mat = DirectX::XMMatrixTranspose(cb_vs_vertexshader.data.mat);
-
-		if (!cb_vs_vertexshader.ApplyChanges())
-			return;
-		this->deviceContext->VSSetConstantBuffers(0, 1, this->cb_vs_vertexshader.GetAddressOf());
-
-		this->cb_ps_pixelshader.data.alpha = 1.0f;
-		this->cb_ps_pixelshader.ApplyChanges();
-		this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_ps_pixelshader.GetAddressOf());
-
-		// square
-		this->deviceContext->PSSetShaderResources(0, 1, this->pavementTexture.GetAddressOf());  // objTexture in pixelshader.hlsl
-		this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), vertexBuffer.StridePtr(), &offset);
-		this->deviceContext->IASetIndexBuffer(indicesBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-		this->deviceContext->DrawIndexed(indicesBuffer.BufferSize(), 0, 0);
-	}
-
-	{ // grass texture
-		//Update Constant Buffer
-		static float translationOffset[3] = { 0, 0, 0 };
-		XMMATRIX world = XMMatrixScaling(5.0f, 5.0f, 5.0f) * XMMatrixTranslation(translationOffset[0], translationOffset[1], translationOffset[2]);
-		cb_vs_vertexshader.data.mat = world * camera.GetViewMatrix() * camera.GetProjectionMatrix();
-		cb_vs_vertexshader.data.mat = DirectX::XMMatrixTranspose(cb_vs_vertexshader.data.mat);
-
-		if (!cb_vs_vertexshader.ApplyChanges())
-			return;
-		this->deviceContext->VSSetConstantBuffers(0, 1, this->cb_vs_vertexshader.GetAddressOf());
-
-		this->cb_ps_pixelshader.data.alpha = 1.0f;
-		this->cb_ps_pixelshader.ApplyChanges();
-		this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_ps_pixelshader.GetAddressOf());
-
-		// square
-		this->deviceContext->PSSetShaderResources(0, 1, this->grassTexture.GetAddressOf());  // objTexture in pixelshader.hlsl
-		this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), vertexBuffer.StridePtr(), &offset);
-		this->deviceContext->IASetIndexBuffer(indicesBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-		this->deviceContext->DrawIndexed(indicesBuffer.BufferSize(), 0, 0);
-	}
-
 	static float alpha = 0.5f;
 
-	{ // pink texture
+	{ // pavement texture
 		//Update Constant Buffer
 		static float translationOffset[3] = { 0, 0, -1.0f };
 		XMMATRIX world = XMMatrixTranslation(translationOffset[0], translationOffset[1], translationOffset[2]);
@@ -105,9 +61,12 @@ void Graphics::RenderFrame()
 		this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_ps_pixelshader.GetAddressOf());
 
 		// square
-		this->deviceContext->PSSetShaderResources(0, 1, this->pinkTexture.GetAddressOf());  // objTexture in pixelshader.hlsl
+		this->deviceContext->PSSetShaderResources(0, 1, this->pavementTexture.GetAddressOf());  // objTexture in pixelshader.hlsl
 		this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), vertexBuffer.StridePtr(), &offset);
 		this->deviceContext->IASetIndexBuffer(indicesBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+		this->deviceContext->RSSetState(this->rasterizerState_CullFront.Get());
+		this->deviceContext->DrawIndexed(indicesBuffer.BufferSize(), 0, 0);
+		this->deviceContext->RSSetState(this->rasterizerState.Get());
 		this->deviceContext->DrawIndexed(indicesBuffer.BufferSize(), 0, 0);
 	}
 
@@ -268,11 +227,26 @@ bool Graphics::InitializeDirectX(HWND hWnd)
 	D3D11_RASTERIZER_DESC rasterizerDesc;
 	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));
 
-	rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;// 채우기
-	rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;  // 어느방향이든 그림
+	rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID; // 채우기
+	rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;  // 어느방향이든 그림
 	//rasterizerDesc.FrontCounterClockwise = TRUE; // TRUE : CCW, FALSE : CW
 
 	hr = this->device->CreateRasterizerState(&rasterizerDesc, this->rasterizerState.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create rasterizer state");
+		return false;
+	}
+
+	// create rasterizer state for culling front
+	D3D11_RASTERIZER_DESC rasterizerState_CullFront;
+	ZeroMemory(&rasterizerState_CullFront, sizeof(D3D11_RASTERIZER_DESC));
+
+	rasterizerState_CullFront.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID; // 채우기
+	rasterizerState_CullFront.CullMode = D3D11_CULL_MODE::D3D11_CULL_FRONT; // 어느방향이든 그림
+	//rasterizerDesc.FrontCounterClockwise = TRUE; // TRUE : CCW, FALSE : CW
+
+	hr = this->device->CreateRasterizerState(&rasterizerState_CullFront, this->rasterizerState_CullFront.GetAddressOf());
 	if (FAILED(hr))
 	{
 		ErrorLogger::Log(hr, "Failed to create rasterizer state");
@@ -390,10 +364,14 @@ bool Graphics::InitializeScene()
 	//
 	Vertex v[] =
 	{
-		Vertex(-0.5f,  -0.5f,  0.0f,  0.0f,  1.0f),   // Bottom Left  0
-		Vertex(-0.5f,   0.5f,  0.0f,  0.0f,  0.0f),   // Top Left     1
-		Vertex( 0.5f,   0.5f,  0.0f,  1.0f,  0.0f),   // Top Right    2
-		Vertex( 0.5f,  -0.5f,  0.0f,  1.0f,  1.0f),   // Bottom Right 3
+		Vertex(-0.5f,  -0.5f,  -0.5f,  0.0f,  1.0f),   // Front Bottom Left  0
+		Vertex(-0.5f,   0.5f,  -0.5f,  0.0f,  0.0f),   // Front Top Left     1
+		Vertex( 0.5f,   0.5f,  -0.5f,  1.0f,  0.0f),   // Front Top Right    2
+		Vertex( 0.5f,  -0.5f,  -0.5f,  1.0f,  1.0f),   // Front Bottom Right 3
+		Vertex(-0.5f,  -0.5f,   0.5f,  0.0f,  1.0f),   // Back Bottom Left  0
+		Vertex(-0.5f,   0.5f,   0.5f,  0.0f,  0.0f),   // Back Top Left     1
+		Vertex( 0.5f,   0.5f,   0.5f,  1.0f,  0.0f),   // Back Top Right    2
+		Vertex( 0.5f,  -0.5f,   0.5f,  1.0f,  1.0f),   // Back Bottom Right 3
 	};
 
 	// load vertex data
@@ -406,8 +384,18 @@ bool Graphics::InitializeScene()
 
 	DWORD indices[] =
 	{
-		0, 1, 2,
-		0, 2, 3
+		0, 1, 2, //FRONT
+		0, 2, 3, //FRONT
+		4, 7, 6, //BACK 
+		4, 6, 5, //BACK
+		3, 2, 6, //RIGHT SIDE
+		3, 6, 7, //RIGHT SIDE
+		4, 5, 1, //LEFT SIDE
+		4, 1, 0, //LEFT SIDE
+		1, 5, 6, //TOP
+		1, 6, 2, //TOP
+		0, 3, 7, //BOTTOM
+		0, 7, 4, //BOTTOM
 	};
 
 	// Load Index Data

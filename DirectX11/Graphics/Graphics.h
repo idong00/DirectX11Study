@@ -48,6 +48,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilState;
 
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState;
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState_CullFront;
+
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendState;
 
 	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;
