@@ -99,6 +99,9 @@
     <ClCompile Include="Graphics\ImGui\imgui_widgets.cpp">
       <Filter>Source\Graphics\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Model.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StringConverter.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="COMException.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Model.h">
+      <Filter>Header\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -36,38 +36,13 @@ void Graphics::RenderFrame()
 	this->deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	this->deviceContext->RSSetState(this->rasterizerState.Get());
 	this->deviceContext->OMSetDepthStencilState(this->depthStencilState.Get(), 0);
-	this->deviceContext->OMSetBlendState(this->blendState.Get(), NULL, 0xFFFFFFFF);
+	this->deviceContext->OMSetBlendState(NULL, NULL, 0xFFFFFFFF);
 	this->deviceContext->PSSetSamplers(0, 1, this->samplerState.GetAddressOf());
 	this->deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
 	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
 	
-	UINT offset = 0;
-
-	static float alpha = 0.5f;
-
 	{ // pavement texture
-		//Update Constant Buffer
-		static float translationOffset[3] = { 0, 0, -1.0f };
-		XMMATRIX world = XMMatrixTranslation(translationOffset[0], translationOffset[1], translationOffset[2]);
-		cb_vs_vertexshader.data.mat = world * camera.GetViewMatrix() * camera.GetProjectionMatrix();
-		cb_vs_vertexshader.data.mat = DirectX::XMMatrixTranspose(cb_vs_vertexshader.data.mat);
-
-		if (!cb_vs_vertexshader.ApplyChanges())
-			return;
-		this->deviceContext->VSSetConstantBuffers(0, 1, this->cb_vs_vertexshader.GetAddressOf());
-
-		this->cb_ps_pixelshader.data.alpha = alpha;
-		this->cb_ps_pixelshader.ApplyChanges();
-		this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_ps_pixelshader.GetAddressOf());
-
-		// square
-		this->deviceContext->PSSetShaderResources(0, 1, this->pavementTexture.GetAddressOf());  // objTexture in pixelshader.hlsl
-		this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), vertexBuffer.StridePtr(), &offset);
-		this->deviceContext->IASetIndexBuffer(indicesBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-		this->deviceContext->RSSetState(this->rasterizerState_CullFront.Get());
-		this->deviceContext->DrawIndexed(indicesBuffer.BufferSize(), 0, 0);
-		this->deviceContext->RSSetState(this->rasterizerState.Get());
-		this->deviceContext->DrawIndexed(indicesBuffer.BufferSize(), 0, 0);
+		this->model.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	}
 
 	// draw text
@@ -91,7 +66,6 @@ void Graphics::RenderFrame()
 	ImGui::NewFrame();
 	// Create ImGui Test Window
 	ImGui::Begin("Test");
-	ImGui::DragFloat("Alpha", &alpha, 0.1f, 0.0f, 1.0f);
 	ImGui::End();
 	// Assemble Together Draw Data
 	ImGui::Render();
@@ -229,7 +203,7 @@ bool Graphics::InitializeDirectX(HWND hWnd)
 		spriteFont = std::make_unique<DirectX::SpriteFont>(this->device.Get(), L"Data/Fonts/comic_sans_ms_16.spritefont");
 
 		//Create sampler description for sampler state
-		CD3D11_SAMPLER_DESC sampDesc;
+		CD3D11_SAMPLER_DESC sampDesc(D3D11_DEFAULT);
 		sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 		sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 		sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -290,47 +264,8 @@ bool Graphics::InitializeScene()
 {
 	try
 	{
-		//
-		// textured square
-		//
-		Vertex v[] =
-		{
-			Vertex(-0.5f,  -0.5f,  -0.5f,  0.0f,  1.0f),   // Front Bottom Left  0
-			Vertex(-0.5f,   0.5f,  -0.5f,  0.0f,  0.0f),   // Front Top Left     1
-			Vertex(0.5f,   0.5f,  -0.5f,  1.0f,  0.0f),   // Front Top Right    2
-			Vertex(0.5f,  -0.5f,  -0.5f,  1.0f,  1.0f),   // Front Bottom Right 3
-			Vertex(-0.5f,  -0.5f,   0.5f,  0.0f,  1.0f),   // Back Bottom Left  0
-			Vertex(-0.5f,   0.5f,   0.5f,  0.0f,  0.0f),   // Back Top Left     1
-			Vertex(0.5f,   0.5f,   0.5f,  1.0f,  0.0f),   // Back Top Right    2
-			Vertex(0.5f,  -0.5f,   0.5f,  1.0f,  1.0f),   // Back Bottom Right 3
-		};
-
-		// load vertex data
-		HRESULT hr = this->vertexBuffer.Initialize(this->device.Get(), v, ARRAYSIZE(v));
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize vertex buffer.");
-
-		DWORD indices[] =
-		{
-			0, 1, 2, //FRONT
-			0, 2, 3, //FRONT
-			4, 7, 6, //BACK 
-			4, 6, 5, //BACK
-			3, 2, 6, //RIGHT SIDE
-			3, 6, 7, //RIGHT SIDE
-			4, 5, 1, //LEFT SIDE
-			4, 1, 0, //LEFT SIDE
-			1, 5, 6, //TOP
-			1, 6, 2, //TOP
-			0, 3, 7, //BOTTOM
-			0, 7, 4, //BOTTOM
-		};
-
-		// Load Index Data
-		hr = this->indicesBuffer.Initialize(this->device.Get(), indices, ARRAYSIZE(indices));
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize index buffer.");
-
 		// load texture
-		hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data/Textures/seamless_grass.jpg", nullptr, grassTexture.GetAddressOf());
+		HRESULT hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data/Textures/seamless_grass.jpg", nullptr, grassTexture.GetAddressOf());
 		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
 		hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data/Textures/pinksquare.jpg", nullptr, pinkTexture.GetAddressOf());
@@ -345,6 +280,10 @@ bool Graphics::InitializeScene()
 
 		hr = this->cb_ps_pixelshader.Initialize(this->device.Get(), this->deviceContext.Get());
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
+
+		// initialize model
+		if (!model.Initialize(this->device.Get(), this->deviceContext.Get(), this->pavementTexture.Get(), this->cb_vs_vertexshader))
+			return false;
 
 		camera.SetPosition(0.0f, 0.0f, -2.0f);
 		camera.SetProjectionValues(90.0f, static_cast<float>(windowWidth) / static_cast<float>(windowHeight), 0.1f, 1000.0f);
