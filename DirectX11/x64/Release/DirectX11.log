@@ -1,41 +1,15 @@
-﻿C:\DirectX11Study\DirectX11\pixelshader.hlsl(12,12-76): warning X3206: implicit truncation of vector type
+﻿C:\DirectX11Study\DirectX11\pixelshader.hlsl(17,12-76): warning X3206: implicit truncation of vector type
   
   compilation object save succeeded; see C:\DirectX11Study\x64\Release\pixelshader.cso
-  compilation object save succeeded; see C:\DirectX11Study\x64\Release\vertexshader.cso
   AdapterReader.cpp
   Engine.cpp
-c:\directx11study\directx11\engine.cpp(23): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ErrorLogger.cpp
   Camera.cpp
-c:\directx11study\directx11\graphics\camera.cpp(125): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\directx11study\directx11\graphics\camera.cpp(125): warning C4244: '초기화 중': 'double'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\directx11study\directx11\graphics\camera.cpp(126): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\directx11study\directx11\graphics\camera.cpp(134): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\camera.cpp(157): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\camera.cpp(157): warning C4244: '초기화 중': 'double'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\camera.cpp(158): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\camera.cpp(166): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Graphics.cpp
-c:\directx11study\directx11\graphics\graphics.cpp(111): warning C4552: '-': 식의 결과가 사용되지 않습니다.
-c:\directx11study\directx11\graphics\graphics.cpp(213): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\directx11study\directx11\graphics\graphics.cpp(214): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(2538): warning C4267: '초기화 중': 'size_t'에서 '_Ty'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-          with
-          [
-              _Ty=UINT
-          ]
-  c:\directx11study\directx11\graphics\vertexbuffer.h(47): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::unique_ptr<UINT,std::default_delete<_Ty>> std::make_unique<UINT,size_t,0>(size_t &&)'에 대한 참조를 확인하십시오.
-          with
-          [
-              _Ty=UINT
-          ]
-  c:\directx11study\directx11\graphics\vertexbuffer.h(45): note: 클래스 템플릿 멤버 함수 'HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)'을(를) 컴파일하고 있습니다.
-          with
-          [
-              T=Vertex
-          ]
-  c:\directx11study\directx11\graphics\graphics.cpp(314): note: 컴파일 중인 함수 템플릿 인스턴스화 'HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)'에 대한 참조를 확인하십시오.
-          with
-          [
-              T=Vertex
-          ]
-  c:\directx11study\directx11\graphics\graphics.h(42): note: 컴파일 중인 클래스 템플릿 인스턴스화 'VertexBuffer<Vertex>'에 대한 참조를 확인하세요.
   imgui.cpp
   imgui_draw.cpp
   imgui_impl_dx11.cpp
@@ -43,17 +17,49 @@ c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.1
   imgui_widgets.cpp
   KeyboardClass.cpp
   KeyboardEvent.cpp
+  Model.cpp
+  Mesh.cpp
+c:\directx11study\directx11\graphics\mesh.cpp(7): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\mesh.cpp(10): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(1799): warning C4267: '초기화 중': 'size_t'에서 '_Ty'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=UINT
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(1865): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<unsigned __int64>(unsigned __int64 &&)'에 대한 참조를 확인하십시오.
+          with
+          [
+              _Ty=UINT
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(1866): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<unsigned __int64>(unsigned __int64 &&)'에 대한 참조를 확인하십시오.
+          with
+          [
+              _Ty=UINT
+          ]
+  c:\directx11study\directx11\graphics\vertexbuffer.h(68): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::shared_ptr<UINT> std::make_shared<UINT,size_t>(size_t &&)'에 대한 참조를 확인하십시오.
+  c:\directx11study\directx11\graphics\vertexbuffer.h(59): note: 클래스 템플릿 멤버 함수 'HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)'을(를) 컴파일하고 있습니다.
+          with
+          [
+              T=Vertex
+          ]
+  c:\directx11study\directx11\graphics\mesh.cpp(7): note: 컴파일 중인 함수 템플릿 인스턴스화 'HRESULT VertexBuffer<Vertex>::Initialize(ID3D11Device *,T *,UINT)'에 대한 참조를 확인하십시오.
+          with
+          [
+              T=Vertex
+          ]
+  c:\directx11study\directx11\graphics\mesh.h(19): note: 컴파일 중인 클래스 템플릿 인스턴스화 'VertexBuffer<Vertex>'에 대한 참조를 확인하세요.
   MouseClass.cpp
   MouseEvent.cpp
   RenderWindow.cpp
   Shaders.cpp
   Source.cpp
   StringConverter.cpp
+  컴파일하고 있습니다...
   Timer.cpp
   WindowContainer.cpp
   코드를 생성하고 있습니다.
-  1882 of 1882 functions (100.0%) were compiled.
-    1881 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  430 of 2014 functions (21.4%) were compiled, the rest were copied from previous compilation.
+    285 functions were new in current compilation
+    147 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   DirectX11.vcxproj -> C:\DirectX11Study\x64\Release\DirectX11.exe

@@ -20,7 +20,7 @@ bool Engine::ProcessMessages()
 
 void Engine::Update()
 {
-	float dt = timer.GetMilisecondsElapsed();
+	float dt = (float)timer.GetMilisecondsElapsed();
 	timer.Restart();
 
 	while (!keyboard.CharBufferIsEmpty())
