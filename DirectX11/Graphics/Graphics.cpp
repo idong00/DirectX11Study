@@ -282,7 +282,7 @@ bool Graphics::InitializeScene()
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
 		// initialize model
-		if (!gameObject.Initialize("Data/Objects/Samples/orange_embeddedtexture.fbx", this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader))
+		if (!gameObject.Initialize("Data/Objects/Samples/person_embeddedindexed.blend", this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader))
 			return false;
 
 		camera.SetPosition(0.0f, 0.0f, -2.0f);
