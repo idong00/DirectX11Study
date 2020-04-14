@@ -15,6 +15,7 @@ private:
 	bool LoadModel(const std::string & filePath);
 	void ProcessNode(aiNode * node, const aiScene * scene);
 	Mesh ProcessMesh(aiMesh * mesh, const aiScene * scene);
+	std::vector<Texture> LoadMaterialTextures(aiMaterial* pMaterial, aiTextureType textureType, const aiScene* pScene);
 
 private:
 	ID3D11Device * device = nullptr;

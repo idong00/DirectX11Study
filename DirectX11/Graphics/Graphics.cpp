@@ -282,7 +282,7 @@ bool Graphics::InitializeScene()
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
 		// initialize model
-		if (!gameObject.Initialize("Data/Objects/Samples/blue_cube_notexture.fbx", this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader))
+		if (!gameObject.Initialize("Data/Objects/Nanosuit/Nanosuit.obj", this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader))
 			return false;
 
 		camera.SetPosition(0.0f, 0.0f, -2.0f);
