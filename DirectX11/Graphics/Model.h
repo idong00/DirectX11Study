@@ -17,6 +17,7 @@ private:
 	Mesh ProcessMesh(aiMesh * mesh, const aiScene * scene);
 	TextureStorageType DetermineTextureStorageType(const aiScene* pScene, aiMaterial* pMat, unsigned int index, aiTextureType textureType);
 	std::vector<Texture> LoadMaterialTextures(aiMaterial* pMaterial, aiTextureType textureType, const aiScene* pScene);
+	int GetTextureIndex(aiString* pStr);
 
 private:
 	ID3D11Device * device = nullptr;
