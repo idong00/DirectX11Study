@@ -117,6 +117,9 @@
     <ClCompile Include="Graphics\RenderableGameObject.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Light.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ErrorLogger.h">
@@ -221,12 +224,18 @@
     <ClInclude Include="Graphics\RenderableGameObject.h">
       <Filter>Header\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Light.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexshader.hlsl">
       <Filter>Resource</Filter>
     </FxCompile>
     <FxCompile Include="pixelshader.hlsl">
+      <Filter>Resource</Filter>
+    </FxCompile>
+    <FxCompile Include="pixelshader_nolight.hlsl">
       <Filter>Resource</Filter>
     </FxCompile>
   </ItemGroup>

@@ -28,6 +28,10 @@ bool Graphics::Initialize(HWND hWnd, int width, int height)
 
 void Graphics::RenderFrame()
 {
+	this->cb_ps_light.data.dynamicLightColor = light.lightColor;
+	this->cb_ps_light.data.dynamicLightStrength = light.lightStrength;
+	this->cb_ps_light.data.dynamicLightPosition = light.GetPositionFloat3();
+
 	this->cb_ps_light.ApplyChanges();
 	this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_ps_light.GetAddressOf());
 
@@ -46,6 +50,10 @@ void Graphics::RenderFrame()
 	
 	{ // pavement texture
 		this->gameObject.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
+	}
+	{
+		this->deviceContext->PSSetShader(pixelshader_nolight.GetShader(), NULL, 0);
+		this->light.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	}
 
 	// draw text
@@ -263,6 +271,9 @@ bool Graphics::InitializeShaders()
 	if (!pixelshader.Initialize(this->device, shaderfolder + L"pixelshader.cso"))
 		return false;
 
+	if (!pixelshader_nolight.Initialize(this->device, shaderfolder + L"pixelshader_nolight.cso"))
+		return false;
+
 	return true;
 }
 
@@ -289,8 +300,12 @@ bool Graphics::InitializeScene()
 
 		this->cb_ps_light.data.ambientLightColor = XMFLOAT3(0.0f, 1.0f, 1.0f);
 		this->cb_ps_light.data.ambientLightStrength = 1.0f;
+
 		// initialize model
 		if (!gameObject.Initialize("Data/Objects/Nanosuit/Nanosuit.obj", this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader))
+			return false;
+
+		if (!light.Initialize(this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader))
 			return false;
 
 		camera.SetPosition(0.0f, 0.0f, -2.0f);

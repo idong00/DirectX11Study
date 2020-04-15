@@ -12,4 +12,8 @@ struct CB_PS_light
 {
 	DirectX::XMFLOAT3 ambientLightColor; // 12 byte
 	float ambientLightStrength;			 // 4 byte
+
+	DirectX::XMFLOAT3 dynamicLightColor; // 12 byte
+	float dynamicLightStrength;			 // 4 byte
+	DirectX::XMFLOAT3 dynamicLightPosition; // 12 byte
 };
