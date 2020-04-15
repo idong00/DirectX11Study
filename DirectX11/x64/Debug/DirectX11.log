@@ -1,4 +1,2 @@
-﻿C:\DirectX11Study\DirectX11\pixelshader.hlsl(18,12-77): warning X3206: implicit truncation of vector type
-  
-  compilation object save succeeded; see C:\DirectX11Study\x64\Debug\pixelshader.cso
+﻿  Engine.cpp
   DirectX11.vcxproj -> C:\DirectX11Study\x64\Debug\DirectX11.exe
