@@ -114,6 +114,9 @@
     <ClCompile Include="StringHelper.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\RenderableGameObject.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ErrorLogger.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="StringHelper.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\RenderableGameObject.h">
+      <Filter>Header\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
