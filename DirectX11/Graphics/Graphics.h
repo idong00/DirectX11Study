@@ -5,7 +5,7 @@
 #include <SpriteBatch.h>
 #include <SpriteFont.h>
 #include <WICTextureLoader.h>
-#include "Camera.h"
+#include "Camera3D.h"
 #include "../Timer.h"
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_win32.h"
@@ -19,7 +19,7 @@ public:
 	void RenderFrame();
 
 	Light light;
-	Camera camera;
+	Camera3D Camera3D;
 	RenderableGameObject gameObject;
 
 private:
