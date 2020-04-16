@@ -1,2 +1,22 @@
-﻿  Camera2D.cpp
+﻿  Engine.cpp
+  Camera2D.cpp
+  Camera3D.cpp
+  GameObject.cpp
+  GameObject2D.cpp
+  GameObject3D.cpp
+  Graphics.cpp
+  Light.cpp
+  Mesh.cpp
+  Model.cpp
+  RenderableGameObject.cpp
+  Sprite.cpp
+c:\directx11study\directx11\graphics\mesh.cpp(9): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\model.cpp(177): warning C4244: '인수': 'ai_real'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\mesh.cpp(12): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\sprite.cpp(28): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\sprite.cpp(31): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\directx11study\directx11\graphics\graphics.cpp(346): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  RenderWindow.cpp
+  Source.cpp
+  WindowContainer.cpp
   DirectX11.vcxproj -> C:\DirectX11Study\x64\Debug\DirectX11.exe
