@@ -50,6 +50,12 @@ void Engine::Update()
 
 	this->gfx.gameObject.AdjustRotation(0.0f, 0.001f * dt, 0.0f);
 
+	gfx.sprite.AdjustPosition(0.1f * dt, 0.0f, 0.0f);
+	if (gfx.sprite.GetPositionFloat3().x > 160.f)
+	{
+		gfx.sprite.SetPosition(XMFLOAT3(0.0f, 0.0f, 0.0f));
+	}
+
 	// move
 	float Camera3DSpeed = 0.006f;
 
